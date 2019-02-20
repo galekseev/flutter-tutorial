@@ -11,7 +11,35 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: CardsListWidget(),
+      home: HomeRoute(),
+    );
+  }
+}
+
+class HomeRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('First Route'),
+      ),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container( child: Image.asset("graphics/summer-background-1080x1080.png") ),
+//          Expanded(
+//            child: DecoratedBox(
+//              //BoxDecoration(color: Colors.black)
+//              decoration: BoxDecoration(
+//                image: DecorationImage(
+//                    image:
+//                        AssetImage("graphics/summer-background-1080x1080.png")),
+//              ),
+//            ),
+//          ),
+        ],
+      ),
     );
   }
 }
@@ -36,23 +64,23 @@ class CardInfo {
   final String time;
   final String occasion;
   final double insulin;
-  final String insulin_units;
+  final String insulinUnits;
   final double glucose;
-  final String glucose_units;
+  final String glucoseUnits;
   final double carbohydrates;
-  final String ch_units;
+  final String chUnits;
   final Color color;
 
   const CardInfo({
-      this.time,
-      this.occasion,
-      this.insulin,
-      this.insulin_units,
-      this.glucose,
-      this.glucose_units,
-      this.carbohydrates,
-      this.ch_units,
-      this.color,
+    this.time,
+    this.occasion,
+    this.insulin,
+    this.insulinUnits,
+    this.glucose,
+    this.glucoseUnits,
+    this.carbohydrates,
+    this.chUnits,
+    this.color,
   });
 }
 
@@ -60,49 +88,48 @@ const String GLUCOSE_UNITS = "ммоль/л";
 const String INSULIN_UNITS = "ед";
 const String CH_UNITS = "ХЕ";
 
-
-List<CardInfo> cards = [
-  const CardInfo(
+const List<CardInfo> cards = [
+  CardInfo(
     time: "09:00",
     occasion: "Завтрак",
     insulin: 2.0,
-    insulin_units: INSULIN_UNITS,
+    insulinUnits: INSULIN_UNITS,
     glucose: 6.7,
-    glucose_units: GLUCOSE_UNITS,
+    glucoseUnits: GLUCOSE_UNITS,
     carbohydrates: 2.5,
-    ch_units: CH_UNITS,
+    chUnits: CH_UNITS,
     color: Colors.green,
   ),
-  const CardInfo(
+  CardInfo(
     time: "10:00",
     occasion: "Поздний завтрак",
-    insulin_units: INSULIN_UNITS,
+    insulinUnits: INSULIN_UNITS,
     glucose: 4.9,
-    glucose_units: GLUCOSE_UNITS,
+    glucoseUnits: GLUCOSE_UNITS,
     carbohydrates: 0.5,
-    ch_units: CH_UNITS,
+    chUnits: CH_UNITS,
     color: Colors.red,
   ),
-  const CardInfo(
+  CardInfo(
     time: "13:00",
     occasion: "Обед",
     insulin: 2.0,
-    insulin_units: INSULIN_UNITS,
+    insulinUnits: INSULIN_UNITS,
     glucose: 10.1,
-    glucose_units: GLUCOSE_UNITS,
+    glucoseUnits: GLUCOSE_UNITS,
     carbohydrates: 0.5,
-    ch_units: CH_UNITS,
+    chUnits: CH_UNITS,
     color: Colors.red,
   ),
-  const CardInfo(
+  CardInfo(
     time: "14:00",
     occasion: "Дневной перекус",
     insulin: 2.0,
-    insulin_units: INSULIN_UNITS,
+    insulinUnits: INSULIN_UNITS,
     glucose: 10.1,
-    glucose_units: GLUCOSE_UNITS,
+    glucoseUnits: GLUCOSE_UNITS,
     carbohydrates: 0.5,
-    ch_units: CH_UNITS,
+    chUnits: CH_UNITS,
     color: Colors.green,
   ),
 ];
@@ -130,14 +157,21 @@ class InfoCardWidget extends StatelessWidget {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        TextWithTimeWidget(time: _cardInfo.time, label: _cardInfo.occasion),
+                        TextWithTimeWidget(
+                            time: _cardInfo.time, label: _cardInfo.occasion),
                         Row(children: <Widget>[Container(height: 12)]),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            TextWithLabelWidget(text: _cardInfo.glucose.toString(), label: _cardInfo.glucose_units),
-                            TextWithLabelWidget(text: _cardInfo.insulin.toString(), label: _cardInfo.insulin_units),
-                            TextWithLabelWidget(text: _cardInfo.carbohydrates.toString(), label: _cardInfo.ch_units)
+                            TextWithLabelWidget(
+                                text: _cardInfo.glucose.toString(),
+                                label: _cardInfo.glucoseUnits),
+                            TextWithLabelWidget(
+                                text: _cardInfo.insulin.toString(),
+                                label: _cardInfo.insulinUnits),
+                            TextWithLabelWidget(
+                                text: _cardInfo.carbohydrates.toString(),
+                                label: _cardInfo.chUnits)
                           ],
                         )
                       ])
